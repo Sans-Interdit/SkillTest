@@ -1,0 +1,15 @@
+<div id="content">
+    <p>project-page works!</p>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+        </tr>
+        <tr *ngFor="let project of projects">
+            <td>{{project.id}}</td>
+            <td>{{project.description}}</td>
+        </tr>
+    </table>
+    <input type="text" maxlength="500" (keyup)="changeDescription($event)"/>
+    <button (click)="create()">create</button>
+</div>
