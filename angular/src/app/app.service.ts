@@ -6,15 +6,19 @@ import { Observable } from "rxjs"
   providedIn: 'root',
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:3000/';
+  private apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 
   getProjects() : Observable<any> {
-    return this.http.get(this.apiUrl);
+    return this.http.get(this.apiUrl+"/projects");
+  }
+
+  getAccounts(loggin : string) : Observable<any> {
+    return this.http.get(this.apiUrl+"/accounts"+"/"+loggin);
   }
 
   addProject(project : any) : any{
-    return this.http.post(this.apiUrl,project);
+    return this.http.post(this.apiUrl+"/projects",project);
   }
 }

@@ -3,7 +3,7 @@ import { ProjectsService } from './projects.service';
 import { Body, Get, Header, Post } from '@nestjs/common/decorators';
 import { ProjectsDto } from './dto/projects.dto/projects.dto';
 
-@Controller()
+@Controller('projects')
 export class ProjectsController {
     constructor(private projectsService : ProjectsService){}
 

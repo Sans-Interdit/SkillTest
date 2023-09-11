@@ -1,4 +1,4 @@
-<div id="content">
+<div>
     <p>project-page works!</p>
     <table>
         <tr>
@@ -8,6 +8,7 @@
         <tr *ngFor="let project of projects">
             <td>{{project.id}}</td>
             <td>{{project.description}}</td>
+            <td><button (click)="modifyProject(project)">=></button></td>
         </tr>
     </table>
     <input type="text" maxlength="500" (keyup)="changeDescription($event)"/>

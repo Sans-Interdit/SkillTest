@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ProjectPageComponent } from './project-page/project-page.component';
 import { ModificationPageComponent } from './modification-page/modification-page.component';
+import { GlobalVar } from './globalVar';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { ModificationPageComponent } from './modification-page/modification-page
     BrowserModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [GlobalVar],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

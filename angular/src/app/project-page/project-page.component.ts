@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app.service';
+import { ApiService } from 'src/app/app.service';
+import { GlobalVar } from '../globalVar';
+import { Project } from '../project.class'
 
 @Component({
   selector: 'app-project-page',
@@ -8,8 +10,8 @@ import { ApiService } from 'src/app.service';
 })
 
 export class ProjectPageComponent implements OnInit{
-  constructor(private apiService: ApiService) {}
-  description : string = ""
+  constructor(private apiService: ApiService, private globalVar : GlobalVar) {}
+  description : string = "";
   projects : Project[] = [];
   ngOnInit(): void {
     this.apiService.getProjects().subscribe((list) => {
@@ -23,11 +25,10 @@ export class ProjectPageComponent implements OnInit{
       })
     }
   }
+  modifyProject(project : Project){
+    this.globalVar.projectSelected = project;
+  }
   changeDescription(event : any){
     this.description = event.target.value;
   }
-}
-
-class Project{
-  constructor(public id : number, public description : string){}
 }

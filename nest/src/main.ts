@@ -1,8 +1,8 @@
 import { NestFactory } from '@nestjs/core';
-import { ProjectsModule } from './projects/projects.module';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(ProjectsModule);
+  const app = await NestFactory.create(AppModule);
   app.enableCors({
     origin: '*',
     methods: 'POST',
