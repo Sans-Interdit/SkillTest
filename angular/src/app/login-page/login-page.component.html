@@ -1,4 +1,6 @@
-<label>Identifiant :</label>
-<br/>
-<input type="text" maxlength="15" (keyup)="changeLoggin($event)"/>
-<button (click)="beLoggedIn()">GO</button>
+<div>
+    <h1>Veuillez vous identifier</h1>
+    <label>Identifiant : (0000 ou mdp123)</label>
+    <input type="text" maxlength="15" (keyup)="changeLoggin($event)"/>
+    <button (click)="beLoggedIn()">loggin</button>
+</div>

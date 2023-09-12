@@ -1,4 +1,4 @@
-import { Component,Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { GlobalVar } from '../globalVar';
 import { ApiService } from '../app.service';
 

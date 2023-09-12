@@ -1,6 +1,6 @@
 import { Controller } from '@nestjs/common';
 import { ProjectsService } from './projects.service';
-import { Body, Get, Header, Post } from '@nestjs/common/decorators';
+import { Body, Delete, Get, Param, Post, Put } from '@nestjs/common/decorators';
 import { ProjectsDto } from './dto/projects.dto/projects.dto';
 
 @Controller('projects')
@@ -12,9 +12,16 @@ export class ProjectsController {
         return this.projectsService.addProj(project);
     }
 
-    @Header('Access-Control-Allow-Origin', '*')
-    @Header('Access-Control-Allow-Headers', 'Content-Type')
-    @Header('Access-Control-Allow-Methods', 'GET')
+    @Put()
+    modifProj(@Body() project : any): ProjectsDto[]{
+        return this.projectsService.modifProj(project)
+    }
+
+    @Delete(':id')
+    deleteProj(@Param('id') id : any): ProjectsDto[]{
+        return this.projectsService.deleteProj(id)
+    }
+
     @Get()
     getPorjects(): ProjectsDto[] {
         return this.projectsService.getProjects();

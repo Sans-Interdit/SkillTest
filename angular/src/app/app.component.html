@@ -3,10 +3,5 @@
 </div>
 
 <div *ngIf="globalVar.account!=''">
-    <div *ngIf="globalVar.projectSelected===undefined">
-        <app-project-page></app-project-page>
-    </div>
-    <div *ngIf="globalVar.projectSelected!==undefined">
-        <app-modification-page></app-modification-page>
-    </div>
+    <app-project-page></app-project-page>
 </div>

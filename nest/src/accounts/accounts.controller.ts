@@ -6,9 +6,6 @@ import { AccountsService } from './accounts.service';
 export class AccountsController {
     constructor(private accountsService : AccountsService){}
 
-    @Header('Access-Control-Allow-Origin', '*')
-    @Header('Access-Control-Allow-Headers', 'Content-Type')
-    @Header('Access-Control-Allow-Methods', 'GET')
     @Get(':id')
     anyAccounts(@Param('id') id : string): boolean {
         return this.accountsService.getAccounts(id);

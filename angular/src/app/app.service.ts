@@ -21,4 +21,12 @@ export class ApiService {
   addProject(project : any) : any{
     return this.http.post(this.apiUrl+"/projects",project);
   }
+
+  modificateProject(project : any) : any{
+    return this.http.put(this.apiUrl+"/projects", project);
+  }
+
+  deleteProject(id : any) : any{
+    return this.http.delete(this.apiUrl+"/projects"+"/"+id);
+  }
 }

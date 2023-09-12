@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Project } from './project.class'
+import { Project } from './project.class';
 
 @Injectable()
 export class GlobalVar {
+  projects : Project[] = [];
   account: string = "";
-  projectSelected! : Project;
+  projectsView :boolean = true;
 }

@@ -10,25 +10,21 @@ import { Project } from '../project.class'
 })
 
 export class ProjectPageComponent implements OnInit{
-  constructor(private apiService: ApiService, private globalVar : GlobalVar) {}
-  description : string = "";
-  projects : Project[] = [];
+  constructor(private apiService: ApiService, public globalVar : GlobalVar) {}
+  projectChose! : Project;
   ngOnInit(): void {
     this.apiService.getProjects().subscribe((list) => {
-      this.projects = list;
+      this.globalVar.projects = list;
     });
   }
   create(){
-    if(this.description != ""){
-      this.apiService.addProject(new Project(this.projects.length != 0 ? this.projects[this.projects.length - 1].id + 1 : 0, this.description)).subscribe((response :any) => {
-        this.projects = response;
+    const newProj = new Project(this.globalVar.projects.length != 0 ? this.globalVar.projects[this.globalVar.projects.length - 1].id + 1 : 0, "");
+      this.apiService.addProject(newProj).subscribe((response :any) => {
+        this.modifyProject(newProj);
       })
-    }
   }
-  modifyProject(project : Project){
-    this.globalVar.projectSelected = project;
-  }
-  changeDescription(event : any){
-    this.description = event.target.value;
+  modifyProject(project : Project) : void{
+    this.projectChose = project;
+    this.globalVar.projectsView = false;
   }
 }

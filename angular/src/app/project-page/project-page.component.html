@@ -1,16 +1,18 @@
-<div>
-    <p>project-page works!</p>
+<div *ngIf="globalVar.projectsView">
+    <h1>Projets en cours :</h1>
     <table>
         <tr>
             <th>ID</th>
             <th>Description</th>
         </tr>
-        <tr *ngFor="let project of projects">
+        <tr *ngFor="let project of globalVar.projects">
             <td>{{project.id}}</td>
             <td>{{project.description}}</td>
             <td><button (click)="modifyProject(project)">=></button></td>
         </tr>
     </table>
-    <input type="text" maxlength="500" (keyup)="changeDescription($event)"/>
-    <button (click)="create()">create</button>
+    <button (click)="create()">nouveau projet</button>
+</div>
+<div *ngIf="!globalVar.projectsView">
+    <app-modification-page [project]="projectChose"></app-modification-page>
 </div>
