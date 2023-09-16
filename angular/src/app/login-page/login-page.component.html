@@ -1,6 +1,9 @@
 <div>
     <h1>Veuillez vous identifier</h1>
-    <label>Identifiant : (0000 ou mdp123)</label>
-    <input type="text" maxlength="15" (keyup)="changeLoggin($event)"/>
-    <button (click)="beLoggedIn()">loggin</button>
+    <mat-form-field>
+    <mat-label>Identifiant :</mat-label>
+    <input matInput placeholder="0000" type="text" maxlength="15" (keyup)="changeLoggin($event)"/>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="primary" (click)="beLoggedIn()">loggin</button>
 </div>

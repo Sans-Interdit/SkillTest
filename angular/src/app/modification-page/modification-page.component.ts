@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { GlobalVar } from '../globalVar';
 import { Project } from '../project.class';
 import { ApiService } from '../app.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-modification-page',
@@ -9,27 +11,41 @@ import { ApiService } from '../app.service';
   styleUrls: ['./modification-page.component.scss']
 })
 export class ModificationPageComponent implements OnInit {
-  @Input() project! : Project;
+  newName! : string;
   newDescription! : string;
-  constructor(public globalVar : GlobalVar, private apiService : ApiService){}
+  newPriority!:number;
+  project : Project= new Project(0, "", "", 5, 0);
+  constructor(public globalVar : GlobalVar, private apiService : ApiService, private router : Router, private route : ActivatedRoute){
+  }
   ngOnInit(): void {
-    this.newDescription = this.project.description;;
+    this.apiService.getProjects().subscribe((allProj) => {
+      const projectFound = allProj.find((proj : Project) => proj.id.toString()==this.route.snapshot.paramMap.get('id'))
+      if(projectFound!==undefined)
+      {
+        this.project = projectFound;
+      }
+    })
+  }
+  changeName(event : any) :void {
+    this.project.name = event.target.value;
   }
   changeDescription(event : any) :void {
-    this.newDescription = event.target.value;
+    this.project.description = event.target.value;
   }
+  changePriority(event : any) :void {
+    this.project.priority = event.target.value;//ne change pas quand valeur tapé au claiver (mauvais event)
+  }
+  changeProgress(event : any):void{
+    this.project.progress = event.target.value;
+  }
+
   updateProject() : void{
-    this.project.description = this.newDescription;//faire une requete PUT
-    this.apiService.modificateProject(this.project).subscribe((projects : any)=>{
-      this.globalVar.projects = projects;
-    })
-    this.globalVar.projectsView = true;
+    this.apiService.modificateProject(this.project).subscribe();
+    this.router.navigate(['/projects']);
   }
 
   deleteProject(){
-    this.apiService.deleteProject(this.project.id).subscribe((projects : any)=>{
-      this.globalVar.projects = projects;
-    })
-    this.globalVar.projectsView = true;
+    this.apiService.deleteProject(this.project.id).subscribe();
+    this.router.navigate(['/projects']);
   }
 }

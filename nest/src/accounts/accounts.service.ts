@@ -1,11 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { AccountsDto } from './dto/accounts.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Account } from './projects.entity';
 
 @Injectable()
 export class AccountsService {
-    public accounts : AccountsDto[] = [{'username' : "0000"},{'username' : "mdp123"}]
+    constructor(
+        @InjectRepository(Account)
+        private readonly accountRepository: Repository<Account>){}
 
-    getAccounts(id : string): boolean{
-        return this.accounts.some((account) => account.username==id)
+    async findAccount(identifier : string) {
+        return !! await this.accountRepository.findOneBy({username : identifier});
     }
 }
