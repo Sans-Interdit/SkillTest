@@ -1,8 +1,13 @@
 <div>
-    <h1>Veuillez vous identifier</h1>
+    <h1> {{message}} </h1>
     <mat-form-field>
-    <mat-label> {{message}} </mat-label>
-    <input matInput placeholder="0000" type="text" value="{{loggin}}" maxlength="15" (keyup)="changeLoggin($event)"/>
+    <mat-label> Identifiant : </mat-label>
+    <input matInput placeholder="0000" [value]="loggin" type="text" maxlength="15" (keyup)="changeLoggin($event)"/>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <mat-label> Mot de passe : </mat-label>
+        <input matInput placeholder="mdp123" [value]="password" type="text" maxlength="15" (keyup)="changePassword($event)"/>
     </mat-form-field>
     <br>
     <button mat-raised-button color="primary" (click)="beLoggedIn()">loggin</button>

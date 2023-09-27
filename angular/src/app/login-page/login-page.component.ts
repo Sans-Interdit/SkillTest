@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { GlobalVar } from '../globalVar';
-import { ApiService } from '../app.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -10,15 +9,15 @@ import { Router } from '@angular/router';
 })
 export class LoginPageComponent {
 
-  message : string = "Identifiant :";
+  message : string = "Veuillez vous identifier";
   loggin : string = "";
-  constructor(private globalVar : GlobalVar, private readonly apiService : ApiService, private router : Router){}
+  password : string = "";
+  constructor(private router : Router, private authService : AuthService){}
   beLoggedIn(){
     if (this.loggin != ""){
-      this.apiService.getAccounts(this.loggin).subscribe((logged : boolean) => {
-        if (logged){
-          this.globalVar.account = this.loggin;
-          this.router.navigate(['projects']);
+      this.authService.authenticate(this.loggin, this.password).subscribe((authantified :boolean) => {
+        if(authantified){
+        this.router.navigate(['projects']);
         }
         else{
           this.uncorrectID()
@@ -29,11 +28,17 @@ export class LoginPageComponent {
       this.uncorrectID()
     }
   }
+
   changeLoggin(event : any){
     this.loggin = event.target.value;
   }
+  changePassword(event : any){
+    this.password = event.target.value;
+  }
+
   uncorrectID(){
     this.message = "Saisie Invalide";
     this.loggin = "";
+    this.password = "";
   }
 }

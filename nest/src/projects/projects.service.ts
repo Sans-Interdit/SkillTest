@@ -7,14 +7,19 @@ import { Projects } from './projects.entity';
 export class ProjectsService {
   constructor(
     @InjectRepository(Projects)
-    private readonly projectRepository: Repository<Projects>) {}
+    private readonly projectRepository: Repository<Projects>) {}  
 
   async findAll(): Promise<Projects[]> {
-    return this.projectRepository.find();
+    const projects = this.projectRepository
+      .createQueryBuilder('project')
+      .leftJoinAndSelect('project.tasks', 'tasks')
+      .getMany();
+    return projects;
+    //return this.projectRepository.find();
   }
 
   async addProj(project : Projects){
-    this.projectRepository.save(await this.projectRepository.create(project));
+    this.projectRepository.save(project)
   }
 
   async changeProj(project : Projects){
@@ -31,6 +36,9 @@ export class ProjectsService {
 
   async delProj(idProj : number){
     const project = await this.projectRepository.findOneBy({id : idProj})
-    this.projectRepository.delete(project);
+    if (!!project)
+    {
+      this.projectRepository.delete(project);
+    }
   }
 }

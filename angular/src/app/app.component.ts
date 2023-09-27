@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { GlobalVar } from './globalVar';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +6,6 @@ import { GlobalVar } from './globalVar';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(public globalVar : GlobalVar){
+  constructor(){
   }
 }

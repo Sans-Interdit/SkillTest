@@ -4,18 +4,11 @@ import { AppService } from './app.service';
 import { ProjectsModule } from './projects/projects.module';
 import { AccountsModule } from './accounts/accounts.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { TaskModule } from './projects/task/task.module';
+import ormConfig from './orm.config';
 
 @Module({
-  imports: [ProjectsModule, AccountsModule, TypeOrmModule.forRoot({
-    type: 'postgres',
-    host: 'localhost',
-    port: 5432,
-    username: 'postgres',
-    password: 'kakakokokiki',
-    database: 'dbSkillTest',
-    entities: [__dirname + '/**/*.entity{.ts,.js}'],
-    synchronize: true,
-  }),],
+  imports: [ProjectsModule, AccountsModule, TaskModule, TypeOrmModule.forRoot(ormConfig)],
   controllers: [AppController],
   providers: [AppService],
 })

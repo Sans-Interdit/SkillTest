@@ -9,16 +9,17 @@ import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ProjectPageComponent } from './project-page/project-page.component';
 import { ModificationPageComponent } from './modification-page/modification-page.component';
-import { GlobalVar } from './globalVar';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TasksPageComponent } from './tasks-page/tasks-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     ProjectPageComponent,
-    ModificationPageComponent
+    ModificationPageComponent,
+    TasksPageComponent
   ],
   imports: [
     MatFormFieldModule,
@@ -29,7 +30,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [GlobalVar],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

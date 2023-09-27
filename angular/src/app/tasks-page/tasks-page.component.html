@@ -1,0 +1,28 @@
+<div>
+    <h1>Taches du projet {{projName}}</h1>
+    <table>
+        <tr>
+            <th>Personne</th>
+            <th>Description</th>
+            <th>Suppression</th>
+        </tr>
+        <tr *ngFor="let task of tasks">
+            <td>{{task.person}}</td>
+            <td>{{task.description}}</td>
+            <td><button mat-button (click)="delTask(task.id)">
+                <img src="https://cdn.iconscout.com/icon/free/png-256/free-trash-184-458391.png"/>
+            </button></td>
+        </tr>
+    </table>
+    <h2>Ajouter une tâche</h2>
+    <mat-form-field>
+        <mat-label> Personne </mat-label>
+        <input matInput type="text" maxlength="15" (keyup)="changePerson($event)"/>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label> Description </mat-label>
+        <input matInput type="text" maxlength="30" (keyup)="changeDescription($event)"/>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="primary" (click)="addTask()">ajouter</button>
+</div>

@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { GlobalVar } from '../globalVar';
 import { Project } from '../project.class';
 import { ApiService } from '../app.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -14,9 +13,9 @@ export class ModificationPageComponent implements OnInit {
   newName! : string;
   newDescription! : string;
   newPriority!:number;
-  project : Project= new Project(0, "", "", 5, 0);
-  constructor(public globalVar : GlobalVar, private apiService : ApiService, private router : Router, private route : ActivatedRoute){
-  }
+  project : Project= new Project(0, "", "", 5, 0, []);
+
+  constructor(private apiService : ApiService, private router : Router, private route : ActivatedRoute){}
   ngOnInit(): void {
     this.apiService.getProjects().subscribe((allProj) => {
       const projectFound = allProj.find((proj : Project) => proj.id.toString()==this.route.snapshot.paramMap.get('id'))
@@ -26,6 +25,7 @@ export class ModificationPageComponent implements OnInit {
       }
     })
   }
+  
   changeName(event : any) :void {
     this.project.name = event.target.value;
   }
